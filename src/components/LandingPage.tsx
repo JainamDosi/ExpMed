@@ -49,22 +49,22 @@ const LandingPage: React.FC = () => {
               </div>
               <span className="text-sm font-bold tracking-tight text-white">{APP_NAME}</span>
             </div>
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="flex items-center space-x-4 md:space-x-8">
               <button
                 onClick={() => scrollToSection('features')}
-                className="text-xs uppercase tracking-widest text-[#888888] hover:text-cyan-400 transition-colors duration-200 font-medium"
+                className="hidden md:block text-xs uppercase tracking-widest text-[#888888] hover:text-cyan-400 transition-colors duration-200 font-medium"
               >
                 Features
               </button>
               <button
                 onClick={() => scrollToSection('how-it-works')}
-                className="text-xs uppercase tracking-widest text-[#888888] hover:text-cyan-400 transition-colors duration-200 font-medium"
+                className="hidden md:block text-xs uppercase tracking-widest text-[#888888] hover:text-cyan-400 transition-colors duration-200 font-medium"
               >
                 Process
               </button>
               <button
                 onClick={() => navigate('/analyze')}
-                className="accent-button bg-cyan-500 text-black px-6 py-2 rounded-sm font-bold text-xs uppercase tracking-widest transition-all"
+                className="accent-button bg-cyan-500 text-black px-4 md:px-6 py-2 rounded-sm font-bold text-[10px] md:text-xs uppercase tracking-widest transition-all"
               >
                 Try Now
               </button>

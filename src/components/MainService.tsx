@@ -108,7 +108,7 @@ const MainService: React.FC = () => {
     <div className="min-h-screen flex flex-col bg-[#050505] text-[#e5e5e5] font-sans">
       <Header />
 
-      <main className="flex-grow w-full mx-auto px-6 py-12 md:py-24 max-w-7xl">
+      <main className="flex-grow w-full mx-auto px-4 sm:px-6 py-8 md:py-24 max-w-7xl">
         {!analysis ? (
           <div className="grid md:grid-cols-2 gap-12 items-start">
 
@@ -133,8 +133,17 @@ const MainService: React.FC = () => {
                   onChange={handleFileChange}
                   disabled={loading}
                 />
-                <label htmlFor="file-upload" className={`cursor-pointer w-full h-full flex flex-col items-center justify-center ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}>
-                  <div className="space-y-6">
+                <input
+                  type="file"
+                  id="camera-upload"
+                  className="hidden"
+                  accept="image/*"
+                  capture="environment"
+                  onChange={handleFileChange}
+                  disabled={loading}
+                />
+                <div className="w-full h-full flex flex-col items-center justify-center">
+                  <div className="space-y-6 w-full max-w-sm">
                     <div className={`w-20 h-20 rounded-full flex items-center justify-center transition-colors mx-auto ${file ? 'bg-cyan-500/20 text-cyan-400' : 'bg-white/5 text-gray-400'}`}>
                       {file ? (
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -142,18 +151,47 @@ const MainService: React.FC = () => {
                         </svg>
                       ) : (
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
                       )}
                     </div>
+
                     <div className="space-y-2">
                       <p className="text-lg font-medium text-white">
-                        {file ? file.name : isDragging ? "Drop your file here" : "Click to upload or drag and drop"}
+                        {file ? file.name : isDragging ? "Drop to upload" : "Upload Medical Report"}
                       </p>
-                      <p className="text-sm text-gray-400">
-                        {file ? "Ready to analyze" : "Supports PDF, JPG, PNG (Max 10MB)"}
+                      <p className="text-sm text-gray-400 px-4">
+                        {file ? "Ready for analysis" : "PDF, JPG, or PNG supported"}
                       </p>
                     </div>
+
+                    {!file && (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 px-4 sm:px-0">
+                        <label
+                          htmlFor="camera-upload"
+                          className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white py-3 px-4 rounded-xl cursor-pointer transition-all active:scale-95"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                          </svg>
+                          <span className="font-medium text-sm">Take Photo</span>
+                        </label>
+
+                        <label
+                          htmlFor="file-upload"
+                          className="flex items-center justify-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-black py-3 px-4 rounded-xl cursor-pointer transition-all active:scale-95 shadow-lg shadow-cyan-500/20"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                          </svg>
+                          <span className="font-bold text-sm">Upload File</span>
+                        </label>
+                      </div>
+                    )}
+
                     {file && (
                       <button
                         onClick={(e) => {
@@ -161,13 +199,16 @@ const MainService: React.FC = () => {
                           e.stopPropagation();
                           setFile(null);
                         }}
-                        className="text-sm text-red-400 hover:text-red-300 underline underline-offset-4"
+                        className="text-sm text-red-400 hover:text-red-300 flex items-center justify-center gap-2 mx-auto py-2 px-4 rounded-lg hover:bg-red-500/10 transition-colors"
                       >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                        </svg>
                         Remove file
                       </button>
                     )}
                   </div>
-                </label>
+                </div>
               </div>
             </div>
 
