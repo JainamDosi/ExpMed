@@ -9,8 +9,10 @@ const Header: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div className="flex items-center space-x-3 group cursor-pointer" onClick={() => navigate('/')}>
-            <div className="w-8 h-8 bg-gradient-to-tr from-cyan-500 to-blue-500 rounded-lg flex items-center justify-center font-bold text-white text-xs shadow-lg shadow-cyan-500/20 transition-transform group-hover:scale-105">
-              SR
+            <div className="w-8 h-8 bg-gradient-to-tr from-cyan-500 to-blue-500 rounded-lg flex items-center justify-center shadow-lg shadow-cyan-500/20 transition-transform group-hover:scale-105">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
             </div>
             <h1 className="text-sm font-semibold text-white">{APP_NAME}</h1>
           </div>

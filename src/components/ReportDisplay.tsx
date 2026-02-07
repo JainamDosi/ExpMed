@@ -23,8 +23,8 @@ const ReportDisplay: React.FC<ReportDisplayProps> = ({ analysis, onReset }) => {
           </div>
           <VoiceButton text={analysis.summary} label="Listen" />
         </div>
-        <div className="p-8">
-          <p className="text-gray-200 text-lg leading-relaxed font-light">
+        <div className="p-6 md:p-8">
+          <p className="text-gray-200 text-base md:text-lg leading-relaxed font-light">
             {analysis.summary}
           </p>
         </div>
@@ -132,10 +132,10 @@ const ReportDisplay: React.FC<ReportDisplayProps> = ({ analysis, onReset }) => {
       )}
 
       {/* Actions */}
-      <div className="fixed bottom-0 left-0 right-0 p-6 border-t border-white/10 bg-[#050505]/90 backdrop-blur-xl z-50 flex justify-center">
+      <div className="fixed bottom-0 left-0 right-0 p-4 md:p-6 border-t border-white/10 bg-[#050505]/90 backdrop-blur-xl z-50 flex justify-center">
         <button
           onClick={onReset}
-          className="bg-cyan-500 text-black px-8 py-3 rounded-xl font-bold text-sm hover:bg-cyan-400 transition-colors shadow-lg shadow-cyan-500/20 flex items-center space-x-2"
+          className="bg-cyan-500 text-black px-8 py-3 rounded-full font-bold text-sm hover:bg-cyan-400 transition-colors shadow-lg shadow-cyan-500/20 flex items-center space-x-2 w-full md:w-auto justify-center"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />

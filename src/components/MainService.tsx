@@ -169,7 +169,7 @@ const MainService: React.FC = () => {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 px-4 sm:px-0">
                         <label
                           htmlFor="camera-upload"
-                          className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white py-3 px-4 rounded-xl cursor-pointer transition-all active:scale-95"
+                          className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white py-3 px-6 rounded-full cursor-pointer transition-all active:scale-95 border border-white/10"
                           onClick={(e) => e.stopPropagation()}
                         >
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -181,7 +181,7 @@ const MainService: React.FC = () => {
 
                         <label
                           htmlFor="file-upload"
-                          className="flex items-center justify-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-black py-3 px-4 rounded-xl cursor-pointer transition-all active:scale-95 shadow-lg shadow-cyan-500/20"
+                          className="flex items-center justify-center gap-2 bg-cyan-500 hover:bg-cyan-400 text-black py-3 px-6 rounded-full cursor-pointer transition-all active:scale-95 shadow-[0_0_20px_rgba(34,211,238,0.3)]"
                           onClick={(e) => e.stopPropagation()}
                         >
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -253,9 +253,9 @@ const MainService: React.FC = () => {
                 <button
                   onClick={handleAnalyze}
                   disabled={!file || loading}
-                  className={`w-full py-4 rounded-xl font-bold text-base transition-all transform hover:scale-[1.02] active:scale-[0.98] ${!file || loading
+                  className={`w-full py-4 rounded-full font-bold text-base transition-all transform hover:scale-[1.02] active:scale-[0.98] ${!file || loading
                     ? 'bg-white/10 text-gray-500 cursor-not-allowed'
-                    : 'bg-cyan-500 text-black hover:bg-cyan-400 shadow-xl shadow-cyan-500/20'
+                    : 'bg-cyan-500 text-black hover:bg-cyan-400 shadow-[0_0_30px_rgba(34,211,238,0.3)]'
                     }`}
                 >
                   {loading ? (
