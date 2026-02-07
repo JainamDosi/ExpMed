@@ -108,29 +108,21 @@ const MainService: React.FC = () => {
     <div className="min-h-screen flex flex-col bg-[#050505] text-[#e5e5e5] font-sans">
       <Header />
 
-      <main className="flex-grow max-w-4xl w-full mx-auto px-6 py-20">
+      <main className="flex-grow w-full mx-auto px-6 py-12 md:py-24 max-w-7xl">
         {!analysis ? (
-          <div className="max-w-2xl mx-auto space-y-12">
-            <div className="text-left space-y-4">
-              <div className="inline-block px-2 py-1 border border-cyan-500/20 text-[10px] uppercase tracking-[0.2em] text-cyan-400 bg-cyan-500/5">
-                Analyze Report
-              </div>
-              <h2 className="text-4xl md:text-6xl font-bold text-white uppercase tracking-tighter">
-                Upload <br />Your Document
-              </h2>
-            </div>
+          <div className="grid md:grid-cols-2 gap-12 items-start">
 
-            <div className="space-y-12">
-              {/* File Upload Dropzone */}
+            {/* Left Column: Upload Area */}
+            <div className="order-2 md:order-1 h-full">
               <div
                 onDragOver={handleDragOver}
                 onDragLeave={handleDragLeave}
                 onDrop={handleDrop}
-                className={`relative border-2 border-dashed transition-all duration-300 p-16 text-center group ${isDragging
+                className={`h-full min-h-[400px] relative border-2 border-dashed rounded-2xl transition-all duration-300 flex flex-col items-center justify-center text-center p-8 ${isDragging
                   ? 'border-cyan-500 bg-cyan-500/5'
                   : file
-                    ? 'border-cyan-500/40 bg-cyan-500/5'
-                    : 'border-white/10 bg-transparent hover:border-cyan-500/30'
+                    ? 'border-cyan-500/50 bg-cyan-500/5'
+                    : 'border-white/10 bg-white/[0.02] hover:border-cyan-500/30'
                   }`}
               >
                 <input
@@ -141,23 +133,25 @@ const MainService: React.FC = () => {
                   onChange={handleFileChange}
                   disabled={loading}
                 />
-                <label htmlFor="file-upload" className={`cursor-pointer block ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}>
-                  <div className="flex flex-col items-center justify-center space-y-6 transition-transform group-hover:scale-[1.02]">
-                    <div className={`w-16 h-16 border flex items-center justify-center transition-colors ${file ? 'border-cyan-500 bg-cyan-500/10' : 'border-white/10'}`}>
+                <label htmlFor="file-upload" className={`cursor-pointer w-full h-full flex flex-col items-center justify-center ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                  <div className="space-y-6">
+                    <div className={`w-20 h-20 rounded-full flex items-center justify-center transition-colors mx-auto ${file ? 'bg-cyan-500/20 text-cyan-400' : 'bg-white/5 text-gray-400'}`}>
                       {file ? (
-                        <div className="w-4 h-4 bg-cyan-400 animate-pulse"></div>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
                       ) : (
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white/20 group-hover:text-cyan-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M12 4v16m8-8H4" />
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                         </svg>
                       )}
                     </div>
                     <div className="space-y-2">
-                      <p className="font-bold text-white text-xs uppercase tracking-widest">
-                        {file ? file.name : isDragging ? "Release now" : "Select your file"}
+                      <p className="text-lg font-medium text-white">
+                        {file ? file.name : isDragging ? "Drop your file here" : "Click to upload or drag and drop"}
                       </p>
-                      <p className="text-[10px] text-[#555] uppercase tracking-widest font-medium">
-                        {file ? "File ready" : "PDF, JPG or PNG supported"}
+                      <p className="text-sm text-gray-400">
+                        {file ? "Ready to analyze" : "Supports PDF, JPG, PNG (Max 10MB)"}
                       </p>
                     </div>
                     {file && (
@@ -167,30 +161,46 @@ const MainService: React.FC = () => {
                           e.stopPropagation();
                           setFile(null);
                         }}
-                        className="text-[9px] uppercase tracking-widest text-white/30 hover:text-red-400 border-b border-white/5 transition-colors"
+                        className="text-sm text-red-400 hover:text-red-300 underline underline-offset-4"
                       >
-                        Change File
+                        Remove file
                       </button>
                     )}
                   </div>
                 </label>
               </div>
+            </div>
 
-              {/* Language Selection */}
-              <div className="border border-white/10 p-10 space-y-8 bg-white/[0.01] hover:border-cyan-500/10 transition-colors">
-                <div className="space-y-6">
-                  <label className="block text-[10px] uppercase tracking-widest font-bold text-[#888888]">
-                    Explanation Language
+            {/* Right Column: Key Info & Actions */}
+            <div className="order-1 md:order-2 space-y-10">
+              <div className="space-y-4">
+                <div className="inline-flex items-center space-x-2 text-cyan-400 font-medium text-sm">
+                  <span className="w-2 h-2 rounded-full bg-cyan-500"></span>
+                  <span>Free Medical Analysis</span>
+                </div>
+                <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight">
+                  Simplify your <br />
+                  <span className="text-gray-500">medical reports.</span>
+                </h2>
+                <p className="text-gray-400 text-lg leading-relaxed max-w-md">
+                  Upload your lab test or prescription and get a simple, easy-to-understand explanation in seconds.
+                </p>
+              </div>
+
+              <div className="space-y-8 bg-white/[0.03] p-8 rounded-2xl border border-white/5">
+                <div className="space-y-4">
+                  <label className="block text-sm font-medium text-gray-300">
+                    Choose Language
                   </label>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-3">
                     {LANGUAGE_OPTIONS.map((opt) => (
                       <button
                         key={opt.value}
                         onClick={() => setLanguage(opt.value as Language)}
                         disabled={loading}
-                        className={`px-6 py-3 rounded-none text-[10px] font-bold uppercase tracking-widest transition-all ${language === opt.value
-                          ? 'bg-cyan-500 text-black shadow-[0_0_15px_rgba(34,211,238,0.3)]'
-                          : 'bg-transparent text-[#888888] border border-white/10 hover:border-cyan-500/30 hover:text-cyan-400'
+                        className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${language === opt.value
+                          ? 'bg-cyan-500 text-black shadow-lg shadow-cyan-500/20'
+                          : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white'
                           } ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
                       >
                         {opt.label}
@@ -199,30 +209,31 @@ const MainService: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Analyze Button */}
                 <button
                   onClick={handleAnalyze}
                   disabled={!file || loading}
-                  className={`w-full py-5 rounded-none font-bold text-sm uppercase tracking-[0.2em] transition-all sleek-button ${!file || loading
-                    ? 'bg-transparent text-[#333] border-white/5 cursor-not-allowed'
-                    : 'bg-white text-black hover:bg-cyan-500 hover:text-black hover:border-cyan-500'
+                  className={`w-full py-4 rounded-xl font-bold text-base transition-all transform hover:scale-[1.02] active:scale-[0.98] ${!file || loading
+                    ? 'bg-white/10 text-gray-500 cursor-not-allowed'
+                    : 'bg-cyan-500 text-black hover:bg-cyan-400 shadow-xl shadow-cyan-500/20'
                     }`}
                 >
                   {loading ? (
                     <div className="flex items-center justify-center space-x-3">
-                      <div className="dot-pulse"></div>
-                      <span className="font-bold uppercase italic text-[10px] tracking-widest text-[#888888]">{LOADING_MESSAGES[loadingMsgIdx]}</span>
+                      <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin"></div>
+                      <span>{LOADING_MESSAGES[loadingMsgIdx]}</span>
                     </div>
                   ) : (
-                    "Analyze Now →"
+                    "Analyze Report"
                   )}
                 </button>
               </div>
 
               {/* Error Message */}
               {error && (
-                <div className="border border-red-900/50 bg-red-950/20 rounded-none p-5 flex items-start space-x-3 text-red-500 font-sans text-[10px] uppercase tracking-widest font-bold">
-                  <div className="w-1 h-1 bg-red-500 rounded-full mt-1"></div>
+                <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 flex items-start space-x-3 text-red-400 text-sm">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                  </svg>
                   <p>{error}</p>
                 </div>
               )}

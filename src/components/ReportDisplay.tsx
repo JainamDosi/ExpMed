@@ -9,34 +9,41 @@ interface ReportDisplayProps {
 
 const ReportDisplay: React.FC<ReportDisplayProps> = ({ analysis, onReset }) => {
   return (
-    <div className="max-w-4xl mx-auto space-y-12 pb-48 fade-in">
-      {/* Overview Section */}
-      <section className="border border-white/5 bg-white/[0.01] hover:border-cyan-500/10 transition-colors">
-        <div className="px-6 py-4 border-b border-white/5 bg-white/[0.01] flex items-center justify-between">
+    <div className="max-w-4xl mx-auto space-y-8 pb-32 fade-in">
+      {/* Summary Section */}
+      <section className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
+        <div className="px-6 py-4 border-b border-white/5 flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="w-6 h-6 border border-cyan-500/20 flex items-center justify-center">
-              <div className="w-2 h-2 bg-cyan-400 dot-pulse"></div>
+            <div className="w-8 h-8 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
             </div>
-            <h2 className="text-[10px] font-bold text-white uppercase tracking-[0.2em]">Summary</h2>
+            <h2 className="text-sm font-semibold text-white tracking-wide">Report Summary</h2>
           </div>
-          <VoiceButton text={analysis.summary} label="Listen to Summary" />
+          <VoiceButton text={analysis.summary} label="Listen" />
         </div>
         <div className="p-8">
-          <p className="text-white text-xl leading-relaxed font-light italic">
-            "{analysis.summary}"
+          <p className="text-gray-200 text-lg leading-relaxed font-light">
+            {analysis.summary}
           </p>
         </div>
       </section>
 
       {/* Clinical Observations */}
       {analysis.clinicalObservations && analysis.clinicalObservations.length > 0 && (
-        <section className="border border-white/5 p-8 space-y-6 bg-white/[0.01]">
-          <h3 className="text-[10px] font-bold text-[#888888] uppercase tracking-[0.2em]">Important Notes</h3>
+        <section className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 md:p-8">
+          <div className="flex items-center space-x-2 mb-6 text-gray-400">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+            </svg>
+            <h3 className="text-sm font-medium uppercase tracking-wider">Key Observations</h3>
+          </div>
           <ul className="space-y-4">
             {analysis.clinicalObservations.map((obs, idx) => (
-              <li key={idx} className="text-sm text-[#e5e5e5] flex items-start space-x-4 group">
-                <span className="text-cyan-500/30 font-mono text-[10px] pt-1 group-hover:text-cyan-400 transition-colors">[{idx + 1}]</span>
-                <span className="leading-relaxed">{obs}</span>
+              <li key={idx} className="flex gap-4 text-gray-300 text-sm leading-relaxed">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-500/50 mt-2 shrink-0"></span>
+                <span>{obs}</span>
               </li>
             ))}
           </ul>
@@ -45,42 +52,43 @@ const ReportDisplay: React.FC<ReportDisplayProps> = ({ analysis, onReset }) => {
 
       {/* Lab Tests */}
       {analysis.tests.length > 0 && (
-        <section className="space-y-6">
-          <h2 className="text-[10px] font-bold text-[#888888] uppercase tracking-[0.2em] px-1">
-            Test Results ({analysis.tests.length})
-          </h2>
-          <div className="border-y border-white/5 divide-y divide-white/5">
+        <section className="space-y-4">
+          <div className="flex items-center justify-between px-2">
+            <h2 className="text-xl font-semibold text-white">Test Results</h2>
+            <span className="text-sm text-gray-500">{analysis.tests.length} tests analyzed</span>
+          </div>
+
+          <div className="space-y-4">
             {analysis.tests.map((test, idx) => (
-              <div key={idx} className="py-12 first:pt-0 group hover-lift">
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-8">
-                  <div className="space-y-2">
-                    <div className="text-[10px] text-cyan-500/20 font-mono tracking-widest lowercase">ref_{idx}</div>
-                    <h3 className="font-bold text-white text-3xl uppercase tracking-tighter group-hover:text-cyan-400 transition-colors">{test.name}</h3>
-                    <p className="text-[10px] font-bold text-[#444] uppercase tracking-widest">Normal Range: {test.normalRange}</p>
+              <div key={idx} className="bg-white/[0.02] border border-white/5 rounded-xl p-6 hover:bg-white/[0.04] transition-colors">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-4">
+                  <div>
+                    <h3 className="text-lg font-medium text-white mb-1">{test.name}</h3>
+                    <p className="text-sm text-gray-500">Normal Range: {test.normalRange}</p>
                   </div>
-                  <div className="flex flex-col items-end gap-2">
-                    <div className="flex items-baseline gap-4">
-                      <span className="text-[10px] font-bold text-[#888888] uppercase tracking-widest">Your Result</span>
-                      <span className="text-4xl font-bold text-white tracking-tighter">{test.value}</span>
+
+                  <div className="flex items-center gap-4">
+                    <div className="text-right">
+                      <div className="text-2xl font-bold text-white tracking-tight">{test.value}</div>
+                      <div className="text-xs text-gray-500 uppercase tracking-wider font-medium">Result</div>
                     </div>
-                    <div className={`px-4 py-1 text-[10px] font-bold tracking-[0.2em] uppercase border transition-all ${test.status === 'Normal' ? 'border-green-500/20 text-green-400 bg-green-500/5' :
-                      test.status === 'High' ? 'border-red-500/40 text-red-500 bg-red-500/5 shadow-[0_0_15px_rgba(239,68,68,0.1)]' :
-                        test.status === 'Low' ? 'border-amber-500/40 text-amber-500 bg-amber-500/5 shadow-[0_0_15px_rgba(245,158,11,0.1)]' :
-                          'border-white/5 text-[#444]'
+                    <div className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide border ${test.status === 'Normal' ? 'bg-green-500/10 text-green-400 border-green-500/20' :
+                      test.status === 'High' ? 'bg-red-500/10 text-red-400 border-red-500/20' :
+                        test.status === 'Low' ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' :
+                          'bg-gray-500/10 text-gray-400 border-gray-500/20'
                       }`}>
                       {test.status}
                     </div>
                   </div>
                 </div>
-                <div className="border-l border-cyan-500/10 pl-8 space-y-4">
-                  <div className="flex items-start gap-4">
-                    <div className="mt-1">
-                      <VoiceButton text={`${test.name}. ${test.explanation}`} compact />
-                    </div>
-                    <p className="text-[#888888] text-sm leading-relaxed italic max-w-2xl">
-                      {test.explanation}
-                    </p>
+
+                <div className="pt-4 border-t border-white/5 flex gap-4 mt-4">
+                  <div className="shrink-0 mt-0.5">
+                    <VoiceButton text={`${test.name}. ${test.explanation}`} compact />
                   </div>
+                  <p className="text-sm text-gray-400 leading-relaxed max-w-3xl">
+                    {test.explanation}
+                  </p>
                 </div>
               </div>
             ))}
@@ -90,26 +98,31 @@ const ReportDisplay: React.FC<ReportDisplayProps> = ({ analysis, onReset }) => {
 
       {/* Medicines */}
       {analysis.medicines.length > 0 && (
-        <section className="space-y-6">
-          <h2 className="text-[10px] font-bold text-[#888888] uppercase tracking-[0.2em] px-1">Prescribed Medications</h2>
-          <div className="grid md:grid-cols-2 gap-4 px-1">
+        <section className="space-y-4 mt-8">
+          <h2 className="text-xl font-semibold text-white px-2">Medications</h2>
+          <div className="grid md:grid-cols-2 gap-4">
             {analysis.medicines.map((med, idx) => (
-              <div key={idx} className="border border-white/10 p-10 hover:border-cyan-500/20 transition-all relative group bg-white/[0.01]">
-                <div className="absolute top-4 right-4 text-[10px] text-cyan-500/10 font-mono group-hover:text-cyan-500/30 transition-colors">DRUG_0{idx}</div>
-                <div className="space-y-8">
-                  <div className="flex items-start justify-between">
-                    <h3 className="font-bold text-white text-2xl uppercase tracking-tight group-hover:text-cyan-400 transition-colors">{med.name}</h3>
-                    <VoiceButton text={`${med.name}. ${med.generalPurpose}. ${med.howItWorks}`} compact />
+              <div key={idx} className="bg-white/[0.02] border border-white/5 rounded-xl p-6 hover:bg-white/[0.04] transition-colors">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-cyan-500/10 text-cyan-500 flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-medium text-white">{med.name}</h3>
                   </div>
-                  <div className="space-y-6">
-                    <div className="space-y-2">
-                      <h4 className="text-[10px] font-bold text-[#444] uppercase tracking-widest">Purpose</h4>
-                      <p className="text-sm text-[#e5e5e5] font-light leading-relaxed">{med.generalPurpose}</p>
-                    </div>
-                    <div className="space-y-2">
-                      <h4 className="text-[10px] font-bold text-[#444] uppercase tracking-widest">How it works</h4>
-                      <p className="text-sm text-[#888888] italic leading-relaxed">{med.howItWorks}</p>
-                    </div>
+                  <VoiceButton text={`${med.name}. ${med.generalPurpose}. ${med.howItWorks}`} compact />
+                </div>
+
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Purpose</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed">{med.generalPurpose}</p>
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">How it works</h4>
+                    <p className="text-sm text-gray-400 italic leading-relaxed">{med.howItWorks}</p>
                   </div>
                 </div>
               </div>
@@ -119,12 +132,15 @@ const ReportDisplay: React.FC<ReportDisplayProps> = ({ analysis, onReset }) => {
       )}
 
       {/* Actions */}
-      <div className="fixed bottom-0 left-0 right-0 p-8 border-t border-white/5 flex justify-center z-40 bg-[#050505]/80 backdrop-blur-xl">
+      <div className="fixed bottom-0 left-0 right-0 p-6 border-t border-white/10 bg-[#050505]/90 backdrop-blur-xl z-50 flex justify-center">
         <button
           onClick={onReset}
-          className="accent-button bg-cyan-500 text-black px-12 py-5 rounded-sm font-bold text-sm uppercase tracking-[0.3em] shadow-[0_0_30px_rgba(34,211,238,0.2)]"
+          className="bg-cyan-500 text-black px-8 py-3 rounded-xl font-bold text-sm hover:bg-cyan-400 transition-colors shadow-lg shadow-cyan-500/20 flex items-center space-x-2"
         >
-          Analyze Another Report
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+          <span>Analyze New Report</span>
         </button>
       </div>
     </div>

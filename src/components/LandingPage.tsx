@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { APP_NAME } from '../constants';
 
-interface LandingPageProps {
-  onGetStarted: () => void;
-}
-
-const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
+const LandingPage: React.FC = () => {
+  const navigate = useNavigate();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const heroRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -42,7 +40,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
       <nav className="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            <div className="flex items-center space-x-3 group cursor-pointer" onClick={() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              navigate('/');
+            }}>
               <div className="w-8 h-8 bg-cyan-500 flex items-center justify-center font-bold text-black text-sm transition-transform group-hover:rotate-12">
                 SR
               </div>
@@ -62,7 +63,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
                 Process
               </button>
               <button
-                onClick={onGetStarted}
+                onClick={() => navigate('/analyze')}
                 className="accent-button bg-cyan-500 text-black px-6 py-2 rounded-sm font-bold text-xs uppercase tracking-widest transition-all"
               >
                 Try Now
@@ -108,7 +109,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <button
-                  onClick={onGetStarted}
+                  onClick={() => navigate('/analyze')}
                   className="accent-button bg-cyan-500 text-black px-10 py-4 rounded-sm font-bold text-sm uppercase tracking-widest hover:scale-105 transition-transform shadow-[0_0_20px_rgba(34,211,238,0.2)]"
                 >
                   Analyze Report →
@@ -292,7 +293,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
               Ready to <br />Start?
             </h2>
             <button
-              onClick={onGetStarted}
+              onClick={() => navigate('/analyze')}
               className="accent-button bg-cyan-500 text-black px-12 py-6 rounded-sm font-bold text-base uppercase tracking-[0.2em] transform transition-transform hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(34,211,238,0.2)]"
             >
               Analyze Now →
