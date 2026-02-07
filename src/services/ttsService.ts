@@ -54,11 +54,10 @@ export const speakText = async (text: string, audioContext: AudioContext): Promi
 
   const audioData = decodeBase64(base64Audio);
   const audioBuffer = await decodeAudioData(audioData, audioContext, SAMPLE_RATE, 1);
-  
+
   const source = audioContext.createBufferSource();
   source.buffer = audioBuffer;
   source.connect(audioContext.destination);
-  
+
   return source;
 };
-

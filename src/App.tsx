@@ -8,7 +8,7 @@ const App: React.FC = () => {
   const handleGetStarted = () => {
     setShowMainService(true);
     // Scroll to top when navigating
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'auto' });
   };
 
   if (showMainService) {

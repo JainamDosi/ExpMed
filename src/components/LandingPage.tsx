@@ -37,230 +37,162 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-[#e5e5e5] overflow-x-hidden font-sans">
+    <div className="min-h-screen bg-[#050505] text-[#e5e5e5] overflow-x-hidden font-sans">
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-white/10">
+      <nav className="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-white to-gray-300 rounded-lg flex items-center justify-center font-bold text-black text-sm shadow-lg">
-                EM
+            <div className="flex items-center space-x-3 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+              <div className="w-8 h-8 bg-cyan-500 flex items-center justify-center font-bold text-black text-sm transition-transform group-hover:rotate-12">
+                SR
               </div>
-              <span className="text-lg font-semibold text-white">{APP_NAME}</span>
+              <span className="text-sm font-bold tracking-tight text-white">{APP_NAME}</span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
               <button
                 onClick={() => scrollToSection('features')}
-                className="text-[#888888] hover:text-white transition-colors duration-200 text-sm font-medium"
+                className="text-xs uppercase tracking-widest text-[#888888] hover:text-cyan-400 transition-colors duration-200 font-medium"
               >
                 Features
               </button>
               <button
                 onClick={() => scrollToSection('how-it-works')}
-                className="text-[#888888] hover:text-white transition-colors duration-200 text-sm font-medium"
+                className="text-xs uppercase tracking-widest text-[#888888] hover:text-cyan-400 transition-colors duration-200 font-medium"
               >
-                How It Works
-              </button>
-              <button
-                onClick={() => scrollToSection('stats')}
-                className="text-[#888888] hover:text-green-400 transition-colors duration-200 text-sm font-medium"
-              >
-                Stats
+                Process
               </button>
               <button
                 onClick={onGetStarted}
-                className="bg-white text-black px-6 py-2.5 rounded-lg font-semibold text-sm hover:bg-gray-200 transition-all duration-300 hover:scale-105 shadow-lg"
+                className="accent-button bg-cyan-500 text-black px-6 py-2 rounded-sm font-bold text-xs uppercase tracking-widest transition-all"
               >
-                Get Started
+                Try Now
               </button>
             </div>
-            <button
-              onClick={onGetStarted}
-              className="md:hidden bg-white text-black px-4 py-2 rounded-lg font-semibold text-xs hover:bg-gray-200 shadow-lg"
-            >
-              Start
-            </button>
           </div>
         </div>
       </nav>
 
-      {/* Hero Section with 3D Cards */}
+      {/* Hero Section */}
       <section
         ref={heroRef}
         className="relative min-h-screen flex items-center justify-center pt-20 px-6 overflow-hidden"
-        style={{
-          background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255, 255, 255, 0.03) 0%, transparent 50%)`
-        }}
       >
-        {/* Animated Grid Background */}
-        <div className="absolute inset-0 opacity-10">
+        {/* Animated Background Dots */}
+        <div className="absolute inset-0 opacity-[0.05]">
           <div className="absolute inset-0" style={{
-            backgroundImage: `
-              linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px'
+            backgroundImage: `radial-gradient(circle at 2px 2px, #22d3ee 1px, transparent 0)`,
+            backgroundSize: '32px 32px'
           }}></div>
         </div>
 
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-7xl mx-auto relative z-10 w-full">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Left: Text Content */}
             <div className={`space-y-8 ${isVisible ? 'animate-slide-up' : 'opacity-0'}`}>
-              <div className="inline-block px-4 py-2 bg-white/5 border border-white/20 rounded-lg text-xs text-white font-medium backdrop-blur-xl">
-                Medical Report Analyzer
+              <div className="inline-flex items-center space-x-2 px-3 py-1 border border-cyan-500/20 bg-cyan-500/5 rounded-none text-[10px] uppercase tracking-[0.2em] text-cyan-400">
+                <div className="dot-pulse"></div>
+                <span>Easy Health Analysis</span>
               </div>
 
-              <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-                <span className="text-white">Decode</span>
+              <h1 className="text-6xl md:text-8xl font-bold leading-[0.9] tracking-tighter uppercase">
+                <span className="text-white">Understand</span>
                 <br />
-                <span className="gradient-text">Your Reports</span>
+                <span className="gradient-text">Your Health</span>
                 <br />
-                <span className="text-[#a0a0a0]">Instantly</span>
+                <span className="text-white/20 italic">Better</span>
               </h1>
 
-              <p className="text-xl text-[#888888] leading-relaxed max-w-xl font-light">
-                Transform complex medical terminology into clear, understandable language.
-                Upload your lab reports and get instant explanations in English, Hindi, or Hinglish.
+              <p className="text-lg text-[#888888] leading-relaxed max-w-md font-light">
+                Getting medical reports is easy, understanding them shouldn't be hard. Upload your lab reports and get clear, simple explanations instantly.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <button
                   onClick={onGetStarted}
-                  className="px-8 py-4 bg-white text-black rounded-lg font-semibold text-base overflow-hidden hover:bg-gray-200 transition-all duration-300 hover:scale-105 shadow-2xl"
+                  className="accent-button bg-cyan-500 text-black px-10 py-4 rounded-sm font-bold text-sm uppercase tracking-widest hover:scale-105 transition-transform shadow-[0_0_20px_rgba(34,211,238,0.2)]"
                 >
-                  Analyze Now →
+                  Analyze Report →
                 </button>
                 <button
                   onClick={() => scrollToSection('how-it-works')}
-                  className="px-8 py-4 bg-white/5 border border-white/20 text-white rounded-lg font-semibold text-base hover:bg-white/10 hover:border-white/40 transition-all duration-300 backdrop-blur-xl"
+                  className="px-10 py-4 border border-white/10 text-white rounded-sm font-bold text-sm uppercase tracking-widest hover:bg-white/5 transition-all"
                 >
-                  Learn More
+                  How it works
                 </button>
-              </div>
-
-              <div className="flex items-center gap-8 pt-4">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-white rounded-full animate-pulse shadow-lg"></div>
-                  <span className="text-xs text-[#a0a0a0]">100% Free</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-white rounded-full animate-pulse shadow-lg"></div>
-                  <span className="text-xs text-[#a0a0a0]">No Sign Up</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-white rounded-full animate-pulse shadow-lg"></div>
-                  <span className="text-xs text-[#a0a0a0]">Instant Results</span>
-                </div>
               </div>
             </div>
 
-            {/* Right: 3D Medical Report Cards */}
-            <div className="relative h-[600px] lg:h-[700px]">
-              {/* Card 1 - Front */}
-              <div
-                className="absolute top-0 left-0 w-64 h-80 bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl border border-white/10 p-6 card-3d animate-float shadow-2xl"
-                style={{ transform: 'perspective(1000px) rotateY(-15deg) rotateX(10deg)' }}
-              >
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center backdrop-blur-xl">
-                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                      </svg>
+            {/* Right: Modern Visuals */}
+            <div className="relative hidden lg:block h-[500px]">
+              <div className="absolute top-0 right-0 w-[400px] h-[500px] border border-cyan-500/10 glass-effect p-8 flex flex-col justify-between hover-lift">
+                <div className="space-y-6">
+                  <div className="flex justify-between items-start">
+                    <div className="space-y-1">
+                      <div className="text-[10px] uppercase tracking-widest text-cyan-500/50">Status: Ready</div>
+                      <div className="text-xl font-bold uppercase tracking-tight">Report Preview</div>
                     </div>
-                    <div className="text-xs text-white font-medium">Lab Report</div>
+                    <div className="w-10 h-10 border border-cyan-500/20 flex items-center justify-center">
+                      <div className="dot-pulse"></div>
+                    </div>
                   </div>
-                  <div className="space-y-2">
-                    <div className="h-2 bg-white/10 rounded w-3/4"></div>
-                    <div className="h-2 bg-white/10 rounded w-1/2"></div>
-                    <div className="h-2 bg-white/10 rounded w-5/6"></div>
+
+                  <div className="space-y-4 pt-4">
+                    {[1, 2, 3].map(i => (
+                      <div key={i} className="h-px bg-white/5 w-full"></div>
+                    ))}
                   </div>
-                  <div className="mt-4 space-y-1">
-                    <div className="text-xs text-[#888888]">Glucose: 95 mg/dL</div>
-                    <div className="text-xs text-[#888888]">Hemoglobin: 14.2 g/dL</div>
-                    <div className="text-xs text-white">✓ All Normal</div>
+
+                  <div className="space-y-5">
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-[10px] uppercase tracking-widest font-bold">
+                        <span className="text-[#888888]">Hemoglobin</span>
+                        <span className="text-cyan-400">14.2 g/dL</span>
+                      </div>
+                      <div className="w-full h-[1px] bg-white/5 overflow-hidden">
+                        <div className="w-[70%] h-full bg-cyan-500 shadow-[0_0_8px_rgba(34,211,238,0.5)]"></div>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-[10px] uppercase tracking-widest font-bold">
+                        <span className="text-[#888888]">Glucose</span>
+                        <span className="text-cyan-400">95 mg/dL</span>
+                      </div>
+                      <div className="w-full h-[1px] bg-white/5 overflow-hidden">
+                        <div className="w-[45%] h-full bg-cyan-500 shadow-[0_0_8px_rgba(34,211,238,0.5)]"></div>
+                      </div>
+                    </div>
                   </div>
+                </div>
+
+                <div className="text-[10px] uppercase tracking-widest text-[#333] font-mono">
+                  SWASTHYA_HELPER v1.0
                 </div>
               </div>
 
-              {/* Card 2 - Middle */}
-              <div
-                className="absolute top-20 right-0 w-64 h-80 bg-gradient-to-br from-slate-800/50 to-slate-900/50 rounded-xl border border-white/20 p-6 card-3d animate-float-delayed shadow-2xl backdrop-blur-xl"
-                style={{ transform: 'perspective(1000px) rotateY(10deg) rotateX(-5deg)' }}
-              >
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center backdrop-blur-xl">
-                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                      </svg>
-                    </div>
-                    <div className="text-xs text-white font-medium">Prescription</div>
-                  </div>
-                  <div className="space-y-2">
-                    <div className="h-2 bg-white/10 rounded w-4/5"></div>
-                    <div className="h-2 bg-white/10 rounded w-2/3"></div>
-                    <div className="h-2 bg-white/10 rounded w-full"></div>
-                  </div>
-                  <div className="mt-4 space-y-1">
-                    <div className="text-xs text-[#888888]">Medication 1</div>
-                    <div className="text-xs text-[#888888]">Dosage: 2x daily</div>
-                    <div className="text-xs text-white">→ Analyzing</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 3 - Back */}
-              <div
-                className="absolute bottom-0 left-1/4 w-64 h-80 bg-gradient-to-br from-slate-900 to-black rounded-xl border border-white/5 p-6 card-3d animate-float-delayed-2 shadow-2xl"
-                style={{ transform: 'perspective(1000px) rotateY(-5deg) rotateX(15deg)' }}
-              >
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center backdrop-blur-xl">
-                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                    </div>
-                    <div className="text-xs text-white font-medium">Explained</div>
-                  </div>
-                  <div className="space-y-2">
-                    <div className="h-2 bg-white/10 rounded w-full"></div>
-                    <div className="h-2 bg-white/10 rounded w-3/4"></div>
-                    <div className="h-2 bg-white/10 rounded w-5/6"></div>
-                  </div>
-                  <div className="mt-4 space-y-1">
-                    <div className="text-xs text-white">✓ Clear Explanation</div>
-                    <div className="text-xs text-[#a0a0a0]">Plain Language</div>
-                    <div className="text-xs text-white">Ready to View</div>
-                  </div>
-                </div>
+              <div className="absolute -bottom-10 -left-10 w-64 h-64 border border-white/10 bg-white/5 backdrop-blur-3xl p-8 flex flex-col justify-end animate-float">
+                <div className="text-4xl font-bold text-cyan-400 mb-2 italic">FREE</div>
+                <div className="text-[10px] uppercase tracking-widest text-[#888888]">No Sign up Required</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Statistics Section */}
-      <section id="stats" className="py-20 px-6 border-t border-white/10">
+      {/* Statistics */}
+      <section id="stats" className="py-24 px-6 border-t border-white/5">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center md:text-left">
             {[
-
-              { value: '3', label: 'Languages' },
-              { value: '24/7', label: 'Available' },
-              { value: '100%', label: 'Free' }
+              { value: '03', label: 'Languages' },
+              { value: 'SEC', label: 'Processing' },
+              { value: 'PDF', label: 'Support' },
+              { value: 'SAFE', label: 'Private' }
             ].map((stat, idx) => (
-              <div
-                key={idx}
-                className="text-center space-y-2 animate-slide-up"
-                style={{ animationDelay: `${idx * 0.1}s` }}
-              >
-                <div className="text-5xl md:text-6xl font-bold text-white">
+              <div key={idx} className="space-y-2 group cursor-default">
+                <div className="text-4xl font-bold text-white tracking-tighter group-hover:text-cyan-400 transition-colors">
                   {stat.value}
                 </div>
-                <div className="text-sm text-[#888888] uppercase tracking-wider font-medium">
+                <div className="text-[10px] text-[#888888] uppercase tracking-[0.3em] font-medium">
                   {stat.label}
                 </div>
               </div>
@@ -269,199 +201,144 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
         </div>
       </section>
 
-      {/* Features Bento Grid */}
-      <section id="features" className="py-20 px-6">
+      {/* Features */}
+      <section id="features" className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16 space-y-4">
-            <div className="inline-block px-4 py-2 bg-white/5 border border-white/20 rounded-lg text-xs text-white font-medium backdrop-blur-xl">
-              Features
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+            <div className="space-y-4">
+              <div className="inline-block px-3 py-1 border border-cyan-500/20 text-[10px] uppercase tracking-widest text-cyan-400 bg-cyan-500/5">
+                Features
+              </div>
+              <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter">
+                Everything <br />You Need
+              </h2>
             </div>
-            <h2 className="text-4xl md:text-6xl font-bold text-white">
-              Powerful Features
-            </h2>
-            <p className="text-xl text-[#888888] max-w-2xl mx-auto font-light">
-              Everything you need to understand your medical reports with confidence
+            <p className="text-[#888888] max-w-sm text-sm leading-relaxed">
+              We make it simple to understand medical data without needing a doctor's degree.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Feature 1 - Large */}
-            <div className="lg:col-span-2 glass-effect rounded-xl p-8 hover:border-white/40 transition-all duration-300 group">
-              <div className="w-14 h-14 bg-white rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
-                <svg className="w-7 h-7 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-3">Multi-Format Support</h3>
-              <p className="text-[#888888] leading-relaxed font-light">
-                Upload images (JPG, PNG) or PDF files. Our AI extracts and analyzes all information automatically with precision.
-              </p>
-            </div>
-
-            {/* Feature 2 */}
-            <div className="glass-effect rounded-xl p-8 hover:border-white/40 transition-all duration-300 group">
-              <div className="w-14 h-14 bg-white rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
-                <svg className="w-7 h-7 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-white mb-3">Multi-Language</h3>
-              <p className="text-[#888888] leading-relaxed font-light">
-                Get explanations in English, Hindi (हिंदी), or Hinglish. Choose your preferred language.
-              </p>
-            </div>
-
-            {/* Feature 3 */}
-            <div className="glass-effect rounded-xl p-8 hover:border-white/40 transition-all duration-300 group">
-              <div className="w-14 h-14 bg-white rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
-                <svg className="w-7 h-7 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-white mb-3">Instant Analysis</h3>
-              <p className="text-[#888888] leading-relaxed font-light">
-                Get detailed explanations in seconds. Fast, accurate results with no delays.
-              </p>
-            </div>
-
-            {/* Feature 4 */}
-            <div className="glass-effect rounded-xl p-8 hover:border-white/40 transition-all duration-300 group">
-              <div className="w-14 h-14 bg-white rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
-                <svg className="w-7 h-7 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-white mb-3">Plain Language</h3>
-              <p className="text-[#888888] leading-relaxed font-light">
-                Complex medical terms explained simply. No medical degree required.
-              </p>
-            </div>
-
-            {/* Feature 5 - Large */}
-            <div className="lg:col-span-2 glass-effect rounded-xl p-8 hover:border-white/40 transition-all duration-300 group">
-              <div className="w-14 h-14 bg-white rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
-                <svg className="w-7 h-7 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-3">Privacy & Security</h3>
-              <p className="text-[#888888] leading-relaxed font-light">
-                Your medical reports are processed securely. We don't store your data permanently, and your privacy is our top priority.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section id="how-it-works" className="py-20 px-6 border-t border-white/10">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16 space-y-4">
-            <div className="inline-block px-4 py-2 bg-white/5 border border-white/20 rounded-lg text-xs text-white font-medium backdrop-blur-xl">
-              Process
-            </div>
-            <h2 className="text-4xl md:text-6xl font-bold text-white">
-              How It Works
-            </h2>
-            <p className="text-xl text-[#888888] max-w-2xl mx-auto font-light">
-              Three simple steps to understand your medical reports
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
             {[
-              { num: '01', title: 'Upload', desc: 'Upload an image or PDF of your medical report. Our system accepts JPG, PNG, and PDF formats.' },
-              { num: '02', title: 'Select Language', desc: 'Choose your preferred language - English, Hindi, or Hinglish. The explanation will be tailored to your choice.' },
-              { num: '03', title: 'Get Explanation', desc: 'Receive a detailed, easy-to-understand explanation with all medical terms explained in plain language.' }
-            ].map((step, idx) => (
-              <div
-                key={idx}
-                className="glass-effect rounded-xl p-8 text-center hover:border-white/40 transition-all duration-300 group"
-              >
-                <div className="inline-block w-20 h-20 bg-white rounded-xl flex items-center justify-center mb-6 text-2xl font-bold text-black group-hover:scale-110 transition-transform shadow-lg">
-                  {step.num}
+              { title: 'Upload Any Format', desc: 'Working with PDF, JPG, and PNG medical reports.' },
+              { title: 'Multiple Languages', desc: 'Choose between English, Hindi, and Hinglish explanations.' },
+              { title: 'Super Fast', desc: 'Get your report summarized in just a few seconds.' },
+              { title: 'Plain English', desc: 'No complex jargon. Just simple, clear language.' },
+              { title: 'Privacy First', desc: 'We don\'t store your reports. Your data stays private.' }
+            ].map((feature, idx) => (
+              <div key={idx} className="glass-effect p-10 hover-lift h-full flex flex-col justify-between min-h-[250px]">
+                <div className="text-cyan-500 opacity-20 font-mono text-xs">0{idx + 1}</div>
+                <div>
+                  <h3 className="text-xl font-bold uppercase tracking-tight text-white mb-4">{feature.title}</h3>
+                  <p className="text-sm text-[#888888] leading-relaxed italic">{feature.desc}</p>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3>
-                <p className="text-[#888888] leading-relaxed font-light">
-                  {step.desc}
-                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* Process Section */}
+      <section id="how-it-works" className="py-24 px-6 bg-white/[0.01]">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            <div className="space-y-12">
+              <div className="space-y-4">
+                <div className="inline-block px-3 py-1 border border-cyan-500/20 text-[10px] uppercase tracking-widest text-cyan-400 bg-cyan-500/5">
+                  Process
+                </div>
+                <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter">3 Simple <br />Steps</h2>
+              </div>
+
+              <div className="space-y-12">
+                {[
+                  { title: 'Upload Report', desc: 'Select your medical report from your device.' },
+                  { title: 'Pick Language', desc: 'Choose how you want the explanation.' },
+                  { title: 'Read Summary', desc: 'Get your easy-to-read medical results.' }
+                ].map((step, idx) => (
+                  <div key={idx} className="flex gap-8 group">
+                    <div className="text-sm font-bold text-cyan-500 transition-transform group-hover:scale-110">0{idx + 1}</div>
+                    <div className="space-y-2">
+                      <h4 className="text-lg font-bold uppercase tracking-tight group-hover:text-cyan-400 transition-colors text-white">{step.title}</h4>
+                      <p className="text-[#888888] text-sm leading-relaxed">{step.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative border border-white/5 p-4 bg-white/[0.02] hover:border-cyan-500/20 transition-colors group">
+              <div className="absolute inset-0 shimmer-effect pointer-events-none"></div>
+              <div className="relative border border-white/5 aspect-square flex items-center justify-center overflow-hidden">
+                <div className="text-[120px] font-bold text-cyan-500/[0.03] absolute rotate-12 select-none group-hover:scale-110 transition-transform">HEALTH</div>
+                <div className="w-3/4 aspect-square border-2 border-cyan-500/10 border-dashed animate-[spin_20s_linear_infinite] rounded-full"></div>
+                <div className="w-1/2 aspect-square border border-cyan-500/20 rounded-full flex items-center justify-center">
+                  <div className="w-12 h-12 bg-cyan-500/20 rounded-full animate-pulse flex items-center justify-center">
+                    <div className="w-4 h-4 bg-cyan-400 rounded-full"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
-      <section className="py-20 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="glass-effect rounded-2xl p-12 md:p-16 text-center border-2 border-white/30 relative overflow-hidden">
-            <div className="absolute inset-0 bg-white/5"></div>
-            <div className="relative z-10 space-y-6">
-              <h2 className="text-4xl md:text-5xl font-bold text-white">
-                Ready to Start?
-              </h2>
-              <p className="text-xl text-[#888888] max-w-2xl mx-auto font-light">
-                Join thousands of users who have gained clarity about their health reports. Start analyzing in seconds.
-              </p>
-              <button
-                onClick={onGetStarted}
-                className="px-10 py-5 bg-white text-black rounded-lg font-bold text-lg hover:bg-gray-200 transition-all duration-300 hover:scale-105 shadow-2xl"
-              >
-                Get Started Now →
-              </button>
-              <p className="text-[#888888] text-sm">
-                No credit card • No sign up • Instant results
-              </p>
+      <section className="py-24 px-6">
+        <div className="max-w-5xl mx-auto text-center border border-cyan-500/10 p-16 md:p-24 bg-cyan-500/[0.01] relative overflow-hidden group">
+          <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"></div>
+          <div className="relative z-10 space-y-10">
+            <h2 className="text-5xl md:text-7xl font-bold uppercase tracking-tighter text-white">
+              Ready to <br />Start?
+            </h2>
+            <button
+              onClick={onGetStarted}
+              className="accent-button bg-cyan-500 text-black px-12 py-6 rounded-sm font-bold text-base uppercase tracking-[0.2em] transform transition-transform hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(34,211,238,0.2)]"
+            >
+              Analyze Now →
+            </button>
+            <div className="flex justify-center gap-12 text-[10px] text-[#444] uppercase tracking-widest font-bold">
+              <span>Private</span>
+              <span>Fast</span>
+              <span>Free</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 border-t border-white/10">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
-            <div>
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-br from-white to-gray-300 rounded-lg flex items-center justify-center font-bold text-black text-sm shadow-lg">
-                  EM
-                </div>
-                <span className="text-lg font-bold text-white">{APP_NAME}</span>
+      <footer className="py-12 px-6 border-t border-white/5 mt-12">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+          <div className="space-y-6 max-w-xs">
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-cyan-500 flex items-center justify-center font-bold text-black text-xs">
+                SR
               </div>
-              <p className="text-[#888888] text-sm font-light">
-                Making medical reports understandable for everyone, in the language they prefer.
-              </p>
+              <span className="text-sm font-bold tracking-tight text-white">{APP_NAME}</span>
             </div>
-            <div>
-              <h4 className="font-bold text-white mb-4">Quick Links</h4>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <button onClick={() => scrollToSection('features')} className="text-[#888888] hover:text-white transition-colors">
-                    Features
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => scrollToSection('how-it-works')} className="text-[#888888] hover:text-white transition-colors">
-                    How It Works
-                  </button>
-                </li>
-                <li>
-                  <button onClick={onGetStarted} className="text-[#888888] hover:text-green-400 transition-colors">
-                    Get Started
-                  </button>
-                </li>
-              </ul>
+            <p className="text-[#888888] text-xs leading-loose italic">
+              Making medical reports clear and accessible for everyone. Simple language for complex data.
+            </p>
+          </div>
+
+          <div className="flex gap-20">
+            <div className="space-y-4">
+              <div className="text-[10px] uppercase tracking-widest text-[#888888] font-bold">Links</div>
+              <div className="flex flex-col gap-3 text-xs text-[#555] font-medium">
+                <button onClick={() => scrollToSection('features')} className="text-left hover:text-cyan-400 transition-colors">Features</button>
+                <button onClick={() => scrollToSection('how-it-works')} className="text-left hover:text-cyan-400 transition-colors">Process</button>
+              </div>
             </div>
-            <div>
-              <h4 className="font-bold text-white mb-4">Important Notice</h4>
-              <p className="text-[#888888] text-xs leading-relaxed font-light">
-                This tool is for educational purposes only. It is NOT a medical diagnosis or a substitute for professional medical advice. Always consult a qualified healthcare provider.
+            <div className="space-y-4">
+              <div className="text-[10px] uppercase tracking-widest text-[#888888] font-bold font-sans">Disclaimer</div>
+              <p className="text-[#444444] text-[10px] uppercase leading-relaxed max-w-[160px]">
+                For educational use only. Consult a doctor for medical advice.
               </p>
             </div>
           </div>
-          <div className="border-t border-white/10 pt-8 text-center text-sm text-[#888888]">
-            <p>&copy; {new Date().getFullYear()} {APP_NAME}. All rights reserved.</p>
-          </div>
+        </div>
+        <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-white/5 text-[10px] uppercase tracking-widest text-[#333] font-bold">
+          &copy; {new Date().getFullYear()} {APP_NAME}. ALL RIGHTS RESERVED
         </div>
       </footer>
     </div>

@@ -85,7 +85,6 @@ export const analyzeReport = async (
 
   const text = response.text;
   if (!text) throw new Error("No response from AI");
-  
+
   return JSON.parse(text) as ReportAnalysis;
 };
-
