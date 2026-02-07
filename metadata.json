@@ -1,0 +1,7 @@
+{
+  "name": "Swasthya Report Explainer",
+  "description": "A simple, unbiased tool to help users understand their medical lab reports and medicines in plain language (English, Hindi, or Hinglish) without providing medical diagnosis or treatment advice.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
